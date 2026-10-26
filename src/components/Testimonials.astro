@@ -1,0 +1,22 @@
+---
+import { site } from "../lib/site";
+---
+
+{
+  site.testimonials.length > 0 && (
+    <section class="section container testimonials" aria-label="Testimonials">
+      <p class="eyebrow">Kind words</p>
+      <div class="testimonial-grid">
+        {site.testimonials.map((t) => (
+          <figure class="testimonial">
+            <blockquote>“{t.quote}”</blockquote>
+            <figcaption>
+              <strong>{t.name}</strong>
+              {t.title && <span>{t.title}</span>}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  )
+}

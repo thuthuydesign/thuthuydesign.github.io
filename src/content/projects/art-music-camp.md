@@ -9,14 +9,22 @@ timeline: "2025"
 platforms: Social & Print
 cover: /images/projects/art-music-camp/01.png
 gallery:
-  - /images/projects/art-music-camp/02.jpg
-  - /images/projects/art-music-camp/03.png
-  - /images/projects/art-music-camp/04.png
-  - /images/projects/art-music-camp/05.jpg
-  - /images/projects/art-music-camp/06.jpg
-  - /images/projects/art-music-camp/07.png
-  - /images/projects/art-music-camp/08.png
-  - /images/projects/art-music-camp/09.png
+  - image: /images/projects/art-music-camp/02.jpg
+    size: full
+  - image: /images/projects/art-music-camp/03.png
+    size: full
+  - image: /images/projects/art-music-camp/04.png
+    size: full
+  - image: /images/projects/art-music-camp/05.jpg
+    size: full
+  - image: /images/projects/art-music-camp/06.jpg
+    size: full
+  - image: /images/projects/art-music-camp/07.png
+    size: full
+  - image: /images/projects/art-music-camp/08.png
+    size: full
+  - image: /images/projects/art-music-camp/09.png
+    size: full
 featured: false
 order: 6
 draft: true

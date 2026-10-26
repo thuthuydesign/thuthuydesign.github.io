@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import Lightbox from "../../components/Lightbox.astro";
 import { render } from "astro:content";
 import { getProjects } from "../../lib/projects";
 import { url } from "../../lib/url";
@@ -15,12 +16,23 @@ export async function getStaticPaths() {
 const { project, next } = Astro.props;
 const d = project.data;
 const { Content } = await render(project);
+const hasBody = Boolean(project.body?.trim());
+
 const meta = [
   ["Client", d.client],
   ["Role", d.role],
   ["Timeline", d.timeline],
   ["Deliverables", d.platforms],
 ].filter(([, v]) => v);
+
+// Case study blocks, shown in this order when filled in. Blank lines split paragraphs.
+const story = [
+  ["The challenge", d.challenge],
+  ["The approach", d.approach],
+  ["The outcome", d.outcome],
+]
+  .filter(([, text]) => text?.trim())
+  .map(([title, text]) => ({ title, paragraphs: text!.split(/\n\s*\n/).map((p) => p.trim()) }));
 ---
 
 <Base title={d.title} description={d.summary} image={d.cover}>
@@ -36,25 +48,75 @@ const meta = [
       <img class="project-cover" src={url(d.cover)} alt={d.title} />
     </div>
 
+    {
+      d.highlights.length > 0 && (
+        <section class="container">
+          <dl class="highlights">
+            {d.highlights.map((h) => (
+              <div>
+                <dt>{h.value}</dt>
+                <dd>{h.label}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )
+    }
+
     <section class="container project-info">
-      <dl class="meta">
+      <aside class="project-aside">
+        <dl class="meta">
+          {
+            meta.map(([k, v]) => (
+              <div>
+                <dt>{k}</dt>
+                <dd>{v}</dd>
+              </div>
+            ))
+          }
+        </dl>
         {
-          meta.map(([k, v]) => (
-            <div>
-              <dt>{k}</dt>
-              <dd>{v}</dd>
+          d.myRole.length > 0 && (
+            <div class="my-role">
+              <p class="eyebrow">What I did</p>
+              <ul>
+                {d.myRole.map((r) => (
+                  <li>{r}</li>
+                ))}
+              </ul>
             </div>
+          )
+        }
+      </aside>
+      <div class="prose">
+        {hasBody && <Content />}
+        {
+          story.map((s) => (
+            <section class="story-block">
+              <h2>{s.title}</h2>
+              {s.paragraphs.map((p) => (
+                <p>{p}</p>
+              ))}
+            </section>
           ))
         }
-      </dl>
-      <div class="prose">
-        <Content />
       </div>
     </section>
 
     <section class="container gallery">
-      {d.gallery.map((src, i) => <img src={url(src)} alt={`${d.title} — image ${i + 2}`} loading="lazy" decoding="async" />)}
+      {
+        d.gallery.map((item, i) => (
+          <figure class:list={["gallery-item", item.size === "half" && "is-half"]}>
+            <button type="button" class="gallery-open" data-index={i} aria-label={`View image ${i + 1} larger`}>
+              <img src={url(item.image)} alt={item.caption || `${d.title} — image ${i + 2}`} loading="lazy" decoding="async" />
+            </button>
+            {item.caption && <figcaption>{item.caption}</figcaption>}
+          </figure>
+        ))
+      }
     </section>
+
+    <Lightbox items={d.gallery.map((g) => ({ src: url(g.image), caption: g.caption }))} />
 
     {
       next && next.id !== project.id && (

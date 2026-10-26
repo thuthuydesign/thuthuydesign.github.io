@@ -44,10 +44,38 @@ content:
         label: Ảnh bìa (tỉ lệ ngang 16:10 đẹp nhất)
         type: image
         required: true
+      - name: highlights
+        label: "Số liệu nổi bật (vd. 40+ / Event materials) — hiện thành hàng số lớn dưới ảnh bìa"
+        type: object
+        list: true
+        fields:
+          - { name: value, label: "Con số / giá trị (vd. 40+, 5 mùa, 2021–2026)", type: string }
+          - { name: label, label: "Giải thích ngắn (vd. Event materials designed)", type: string }
+      - name: myRole
+        label: "Vai trò của tôi — mỗi dòng 1 việc Thủy trực tiếp làm"
+        type: string
+        list: true
+      - name: challenge
+        label: "The challenge — Bài toán / bối cảnh (cách 1 dòng trống để xuống đoạn)"
+        type: text
+      - name: approach
+        label: "The approach — Ý tưởng & giải pháp"
+        type: text
+      - name: outcome
+        label: "The outcome — Kết quả (nên có số liệu)"
+        type: text
       - name: gallery
         label: Ảnh chi tiết (kéo để đổi thứ tự)
-        type: image
+        type: object
         list: true
+        fields:
+          - { name: image, label: Ảnh, type: image, required: true }
+          - { name: caption, label: "Chú thích (không bắt buộc, vd. Logo & color palette)", type: string }
+          - name: size
+            label: "Kích thước: full = hết chiều ngang · half = nửa (2 ảnh half liền nhau sẽ nằm cạnh nhau)"
+            type: select
+            options:
+              values: [full, half]
       - name: featured
         label: Ưu tiên hiện ở trang chủ (trang chủ luôn hiện 4 dự án)
         type: boolean
@@ -58,7 +86,7 @@ content:
         label: Ẩn dự án (bản nháp)
         type: boolean
       - name: body
-        label: Nội dung chi tiết (Concept, Challenge, Process…)
+        label: Giới thiệu dự án (đoạn mở đầu, hiện trước The challenge)
         type: rich-text
 
   - name: site
@@ -80,10 +108,29 @@ content:
       - { name: clients, label: Khách hàng tiêu biểu, type: string, list: true }
       - { name: expertise, label: Chuyên môn, type: string, list: true }
       - { name: hobbies, label: Sở thích, type: string, list: true }
+      - name: workHistory
+        label: "Kinh nghiệm làm việc (mới nhất ở trên) — hiện ở trang About"
+        type: object
+        list: true
+        fields:
+          - { name: period, label: "Thời gian (vd. 2021 – nay)", type: string }
+          - { name: company, label: Công ty, type: string }
+          - { name: role, label: Vị trí, type: string }
+          - { name: description, label: "Mô tả ngắn (1–2 câu, thành tích chính)", type: text }
+      - name: testimonials
+        label: "Lời nhận xét (từ sếp / khách hàng) — hiện ở trang chủ và About"
+        type: object
+        list: true
+        fields:
+          - { name: quote, label: Lời nhận xét, type: text }
+          - { name: name, label: Tên người nhận xét, type: string }
+          - { name: title, label: "Chức vụ, công ty (vd. Marketing Director, Flamingo)", type: string }
       - { name: email, label: Email, type: string }
+      - { name: phone, label: "Số điện thoại / Zalo (để trống để ẩn)", type: string }
+      - { name: resumeFile, label: "File CV PDF (upload — ưu tiên hơn link bên dưới)", type: file }
+      - { name: resume, label: Link CV dự phòng (Google Drive…), type: string }
       - { name: linkedin, label: Link LinkedIn, type: string }
-      - { name: instagram, label: Link Instagram, type: string }
-      - { name: resume, label: Link CV (PDF), type: string }
+      - { name: instagram, label: Link Instagram (để trống để ẩn), type: string }
       - { name: contactTitle, label: Tiêu đề phần liên hệ, type: string }
       - { name: contactText, label: Đoạn văn phần liên hệ, type: text }
       - { name: seoDescription, label: Mô tả cho Google (~155 ký tự), type: text }

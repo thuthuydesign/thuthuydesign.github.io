@@ -67,6 +67,31 @@ Vào **Thông tin cá nhân & liên hệ**, sửa rồi **Save**.
 - Ảnh bìa nên theo tỉ lệ **16:10** để lưới dự án đều nhau.
 - Ảnh chia sẻ (hiện khi gửi link qua Zalo, Facebook, LinkedIn) nên có kích thước **1200×630**.
 
+### Các ô mới từ phiên bản 2.0
+
+Các ô dưới đây **để trống thì sẽ không hiện** gì trên web, nên Thủy cứ điền dần.
+
+**Trong mỗi dự án:**
+| Ô | Hiện ở đâu | Gợi ý cách viết |
+|---|---|---|
+| **Số liệu nổi bật** | Hàng số lớn ngay dưới ảnh bìa | 2–4 mục, ví dụ `40+` / *Event materials designed*, `5` / *Show seasons* |
+| **Vai trò của tôi** | Cột trái, mục "What I did" | Mỗi dòng là một việc Thủy **trực tiếp** làm, ví dụ *Led the identity concept*, *Designed 30+ print & social assets* |
+| **The challenge** | Khối nội dung bên phải | Khách hàng cần gì, khó ở đâu (2–4 câu) |
+| **The approach** | Ngay sau challenge | Ý tưởng, vì sao chọn hướng đó |
+| **The outcome** | Ngay sau approach | Kết quả, nên có con số hoặc phản hồi của khách hàng |
+| **Ảnh chi tiết → Chú thích** | Dưới mỗi ảnh và trong chế độ xem phóng to | Ví dụ *Logo & color palette*, *Signage application* |
+| **Ảnh chi tiết → Kích thước** | Bố cục thư viện ảnh | `full` = hết chiều ngang; `half` = nửa. **Hai ảnh `half` liền nhau sẽ nằm cạnh nhau** |
+
+Xuống đoạn trong các ô *challenge / approach / outcome*: để **một dòng trống** giữa hai đoạn.
+
+**Trong "Thông tin cá nhân & liên hệ":**
+| Ô | Hiện ở đâu |
+|---|---|
+| **Kinh nghiệm làm việc** | Trang About, dạng dòng thời gian. Công việc **mới nhất để trên cùng** |
+| **Lời nhận xét** | Trang chủ (dưới các dự án) và trang About |
+| **Số điện thoại / Zalo** | Phần liên hệ: số bấm gọi được và nút Zalo |
+| **File CV PDF** | Upload file PDF. Nút "Download résumé" sẽ mở file này thay cho link Google Drive |
+
 ---
 
 ## Phần C — Xem thử trên máy (không bắt buộc)

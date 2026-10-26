@@ -9,10 +9,14 @@ timeline: Sep – Oct 2019
 platforms: Print & Social
 cover: /images/projects/flc-18th-anniversary/01.png
 gallery:
-  - /images/projects/flc-18th-anniversary/02.png
-  - /images/projects/flc-18th-anniversary/03.png
-  - /images/projects/flc-18th-anniversary/04.png
-  - /images/projects/flc-18th-anniversary/05.jpg
+  - image: /images/projects/flc-18th-anniversary/02.png
+    size: full
+  - image: /images/projects/flc-18th-anniversary/03.png
+    size: full
+  - image: /images/projects/flc-18th-anniversary/04.png
+    size: full
+  - image: /images/projects/flc-18th-anniversary/05.jpg
+    size: full
 featured: false
 order: 4
 draft: false

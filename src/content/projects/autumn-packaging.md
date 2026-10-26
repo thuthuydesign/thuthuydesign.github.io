@@ -9,9 +9,12 @@ timeline: 2023 – 2024
 platforms: Packaging, Print, Social
 cover: /images/projects/autumn-packaging/01.jpg
 gallery:
-  - /images/projects/autumn-packaging/02.jpg
-  - /images/projects/autumn-packaging/03.jpg
-  - /images/projects/autumn-packaging/04.jpg
+  - image: /images/projects/autumn-packaging/02.jpg
+    size: full
+  - image: /images/projects/autumn-packaging/03.jpg
+    size: full
+  - image: /images/projects/autumn-packaging/04.jpg
+    size: full
 featured: true
 order: 3
 draft: false

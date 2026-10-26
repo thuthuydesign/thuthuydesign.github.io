@@ -1,7 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
 import Clients from "../components/Clients.astro";
-import site from "../data/site.json";
+import Testimonials from "../components/Testimonials.astro";
+import { site } from "../lib/site";
 import { url } from "../lib/url";
 
 const facts = [
@@ -24,7 +25,7 @@ const facts = [
       {site.about.map((p) => <p class="lead">{p}</p>)}
       <div class="hero-actions">
         <a class="btn btn-dark" href="#contact">Say hello →</a>
-        {site.resume && <a class="btn btn-ghost" href={site.resume} target="_blank" rel="noopener">Résumé ↓</a>}
+        {site.resumeUrl && <a class="btn btn-ghost" href={url(site.resumeUrl)} target="_blank" rel="noopener">Résumé ↓</a>}
       </div>
     </div>
   </section>
@@ -42,6 +43,26 @@ const facts = [
     </dl>
   </section>
 
+  {
+    site.workHistory.length > 0 && (
+      <section class="section container two-col">
+        <h2 class="h2">Experience</h2>
+        <ol class="timeline">
+          {site.workHistory.map((e) => (
+            <li>
+              <span class="timeline-period">{e.period}</span>
+              <div>
+                <h3 class="timeline-role">{e.role}</h3>
+                <p class="timeline-company">{e.company}</p>
+                {e.description && <p class="timeline-desc">{e.description}</p>}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )
+  }
+
   <section class="section container two-col">
     <h2 class="h2">What I do</h2>
     <ul class="pill-list">
@@ -50,6 +71,8 @@ const facts = [
   </section>
 
   <Clients />
+
+  <Testimonials />
 
   <section class="section container two-col">
     <h2 class="h2">Beyond the work</h2>

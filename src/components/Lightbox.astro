@@ -1,0 +1,64 @@
+---
+// Full-screen image viewer for the project gallery.
+// Opened by any .gallery-open button whose data-index matches an item here.
+interface Props {
+  items: { src: string; caption: string }[];
+}
+
+const { items } = Astro.props;
+---
+
+<dialog class="lightbox" aria-label="Image viewer" data-items={JSON.stringify(items)}>
+  <figure class="lightbox-figure">
+    <img class="lightbox-img" src="" alt="" />
+    <figcaption class="lightbox-caption"></figcaption>
+  </figure>
+  <span class="lightbox-count" aria-live="polite"></span>
+  <button type="button" class="lightbox-btn lightbox-close" aria-label="Close">✕</button>
+  <button type="button" class="lightbox-btn lightbox-prev" aria-label="Previous image">←</button>
+  <button type="button" class="lightbox-btn lightbox-next" aria-label="Next image">→</button>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>(".lightbox");
+  if (dialog) {
+    const items: { src: string; caption: string }[] = JSON.parse(dialog.dataset.items || "[]");
+    const img = dialog.querySelector<HTMLImageElement>(".lightbox-img")!;
+    const caption = dialog.querySelector<HTMLElement>(".lightbox-caption")!;
+    const count = dialog.querySelector<HTMLElement>(".lightbox-count")!;
+    let index = 0;
+
+    const show = (i: number) => {
+      index = (i + items.length) % items.length;
+      img.src = items[index].src;
+      img.alt = items[index].caption || `Image ${index + 1}`;
+      caption.textContent = items[index].caption;
+      count.textContent = `${index + 1} / ${items.length}`;
+    };
+
+    document.querySelectorAll<HTMLButtonElement>(".gallery-open").forEach((btn) =>
+      btn.addEventListener("click", () => {
+        show(Number(btn.dataset.index));
+        dialog.showModal();
+      }),
+    );
+    dialog.querySelector(".lightbox-close")!.addEventListener("click", () => dialog.close());
+    dialog.querySelector(".lightbox-prev")!.addEventListener("click", () => show(index - 1));
+    dialog.querySelector(".lightbox-next")!.addEventListener("click", () => show(index + 1));
+    // Click on the dark backdrop (not the image or buttons) closes the viewer.
+    dialog.addEventListener("click", (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+    dialog.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") show(index - 1);
+      if (e.key === "ArrowRight") show(index + 1);
+    });
+    // Swipe left/right on phones.
+    let touchX = 0;
+    dialog.addEventListener("touchstart", (e) => (touchX = e.touches[0].clientX), { passive: true });
+    dialog.addEventListener("touchend", (e) => {
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 50) show(dx < 0 ? index + 1 : index - 1);
+    });
+  }
+</script>

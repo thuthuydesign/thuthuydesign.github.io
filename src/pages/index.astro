@@ -2,7 +2,9 @@
 import Base from "../layouts/Base.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import Clients from "../components/Clients.astro";
-import site from "../data/site.json";
+import Testimonials from "../components/Testimonials.astro";
+import WorkStrip from "../components/WorkStrip.astro";
+import { site } from "../lib/site";
 import { getProjects } from "../lib/projects";
 import { url } from "../lib/url";
 
@@ -36,6 +38,8 @@ const selected = [
     </figure>
   </section>
 
+  <WorkStrip projects={projects} />
+
   <Clients />
 
   <section class="section container">
@@ -50,6 +54,8 @@ const selected = [
       {selected.map((p, i) => <ProjectCard project={p} eager={i < 2} />)}
     </div>
   </section>
+
+  <Testimonials />
 
   <section class="section container intro-block">
     <p class="eyebrow">About</p>

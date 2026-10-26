@@ -1,5 +1,5 @@
 ---
-import site from "../data/site.json";
+import { site, phoneDigits } from "../lib/site";
 import { url } from "../lib/url";
 import "../styles/global.css";
 
@@ -64,10 +64,12 @@ const isActive = (p: string) => (p === "/" ? path === "/" : path.startsWith(p));
             <h2 class="contact-title">{site.contactTitle}</h2>
             <p class="contact-text">{site.contactText}</p>
             <a class="contact-email" href={`mailto:${site.email}`}>{site.email}</a>
+            {site.phone && <a class="contact-phone" href={`tel:${phoneDigits}`}>{site.phone}</a>}
             <div class="contact-links">
+              {site.resumeUrl && <a class="btn btn-light" href={url(site.resumeUrl)} target="_blank" rel="noopener">Download résumé ↓</a>}
+              {phoneDigits && <a class="btn btn-ghost" href={`https://zalo.me/${phoneDigits}`} target="_blank" rel="noopener">Zalo ↗</a>}
               {site.linkedin && <a class="btn btn-ghost" href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>}
               {site.instagram && <a class="btn btn-ghost" href={site.instagram} target="_blank" rel="noopener">Instagram ↗</a>}
-              {site.resume && <a class="btn btn-light" href={site.resume} target="_blank" rel="noopener">Download résumé ↓</a>}
             </div>
           </div>
         </section>

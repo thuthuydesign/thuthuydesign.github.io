@@ -1,0 +1,32 @@
+---
+// Auto-scrolling strip of project covers shown right under the homepage hero,
+// so visitors see real work in the first screen. Pauses on hover.
+import type { CollectionEntry } from "astro:content";
+import { url } from "../lib/url";
+
+interface Props {
+  projects: CollectionEntry<"projects">[];
+}
+
+const { projects } = Astro.props;
+// The list is rendered twice so the loop scrolls seamlessly.
+const loop = [...projects, ...projects];
+---
+
+<section class="work-strip" aria-label="Project highlights">
+  <div class="work-strip-track" style={`--count: ${projects.length}`}>
+    {
+      loop.map((p, i) => (
+        <a
+          class="strip-item"
+          href={url(`/work/${p.id}/`)}
+          aria-hidden={i >= projects.length ? "true" : undefined}
+          tabindex={i >= projects.length ? -1 : undefined}
+        >
+          <img src={url(p.data.cover)} alt={p.data.title} loading={i < 4 ? "eager" : "lazy"} decoding="async" />
+          <span class="strip-title">{p.data.title}</span>
+        </a>
+      ))
+    }
+  </div>
+</section>
